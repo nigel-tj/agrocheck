@@ -1,0 +1,17 @@
+<% if current_user.nil? %>
+  <%= link_to new_user_session_path, class: 'login-button' do %>Sign in<% end %>
+<% else %>
+  
+  <%= link_to destroy_user_session_path, method: :delete do %>Log out<% end %>
+<% end %>
+
+
+
+
+<% if current_user.superadmin_role? || current_user.supervisor_role? %>
+  <p>Visible only for superadmins and supervisors! </p>
+<% end %>
+
+<% if can? :manage, User %>
+  <p> using can can. Visible only for superadmins and supervisors! </p>
+<% end %>
